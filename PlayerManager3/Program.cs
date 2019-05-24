@@ -5,7 +5,7 @@ namespace PlayerManager1
 {
     class Program
     {
-        List<Player> players;
+        private List<Player> players;
 
         static void Main(string[] args)
         {
@@ -33,7 +33,7 @@ namespace PlayerManager1
                 switch (option)
                 {
                     case "1": AddPlayer(); break;
-                    case "2": ListPlayers(players); break;
+                    case "2": players.Sort(); ListPlayers(players); break;
                     case "3": ListPlayersWithScoreGreaterThan(); break;
                 }
             } while(option != "4");
@@ -69,12 +69,8 @@ namespace PlayerManager1
         private IEnumerable<Player> GetPlayersWithScoreGreaterThan(
             int minScore)
         {
-            List<Player> playersReturn = new List<Player>();
-
             foreach(Player p in players)
-                if(p.Score > minScore) { playersReturn.Add(p); }
-
-            return playersReturn;
+                if(p.Score > minScore) { yield return p; }
         }
     }
 }

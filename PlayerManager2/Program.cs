@@ -6,7 +6,6 @@ namespace PlayerManager1
     class Program
     {
         List<Player> players;
-
         static void Main(string[] args)
         {
             Program p = new Program();
@@ -69,12 +68,8 @@ namespace PlayerManager1
         private IEnumerable<Player> GetPlayersWithScoreGreaterThan(
             int minScore)
         {
-            List<Player> playersReturn = new List<Player>();
-
             foreach(Player p in players)
-                if(p.Score > minScore) { playersReturn.Add(p); }
-
-            return playersReturn;
+                if(p.Score > minScore) { yield return p; }
         }
     }
 }
